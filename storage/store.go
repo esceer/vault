@@ -2,11 +2,12 @@ package storage
 
 import "github.com/esceer/vault/storage/internal/inmemory"
 
-type Store interface {
-	Store(key string, secret string) error
-	Retrieve(key string) (string, error)
+type IStore interface {
+	Retrieve(key string) ([]byte, error)
+	Store(key string, secret []byte) error
+	Delete(key string) error
 }
 
-func New() Store {
+func New() IStore {
 	return inmemory.NewStore()
 }

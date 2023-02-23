@@ -6,53 +6,31 @@ import (
 	"os"
 )
 
-type Menu struct {
-	Options map[string]func(*bufio.Scanner)
-}
-
-func NewMenu() *Menu {
-	return &Menu{Options: map[string]func(s *bufio.Scanner){
-		"save":   saveSecret,
-		"load":   loadSecret,
-		"delete": deleteSecret,
-	}}
-}
-
-func (m *Menu) Display() {
-	fmt.Println("Select from the below options:")
-	for key, _ := range m.Options {
-		fmt.Printf("'%v'\n", key)
-	}
-
+func DisplayMenu(engine *Engine) {
+	printAvailableOptions()
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		selectedFunction := m.Options[scanner.Text()]
-		if selectedFunction != nil {
-			selectedFunction(scanner)
-		} else {
-			fmt.Println("The option you selected is invalid. Please try again")
+		var err error
+		switch scanner.Text() {
+		case "save":
+			err = engine.SaveSecret()
+		case "load":
+			err = engine.LoadSecret()
+		case "delete":
+			err = engine.DeleteSecret()
+		case "quit":
+			fmt.Println("Exiting...")
+			return
+		default:
+			fmt.Printf("Unknown option '%v'", scanner.Text())
+			printAvailableOptions()
+		}
+		if err != nil {
+			fmt.Println(err)
 		}
 	}
 }
 
-func saveSecret(scanner *bufio.Scanner) {
-	fmt.Println("Saving secret...")
-
-	readInput(scanner, "Host: ")
-	host := scanner.Text()
-
-	readInput(scanner, "Secret: ")
-	secret:= scanner.Text()
-
-	Saving...
-}
-
-func loadSecret(scanner *bufio.Scanner) {}
-
-func deleteSecret(scanner *bufio.Scanner) {}
-
-func readInput(scanner *bufio.Scanner, displayText string) {
-	fmt.Printf("%v", displayText)
-	scanner.Scan()
-	fmt.Println()
+func printAvailableOptions() {
+	fmt.Println("Select from the following options: %v", []string{"save", "load", "delete", "quit"})
 }
