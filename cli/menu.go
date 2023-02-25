@@ -9,8 +9,11 @@ import (
 func DisplayMenu(engine *Engine) {
 	printAvailableOptions()
 	scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
+	for {
 		var err error
+
+		fmt.Print("> ")
+		scanner.Scan()
 		switch scanner.Text() {
 		case "save":
 			err = engine.SaveSecret()
@@ -22,15 +25,21 @@ func DisplayMenu(engine *Engine) {
 			fmt.Println("Exiting...")
 			return
 		default:
-			fmt.Printf("Unknown option '%v'", scanner.Text())
+			fmt.Printf("Unknown option '%v'. ", scanner.Text())
 			printAvailableOptions()
 		}
+
 		if err != nil {
 			fmt.Println(err)
 		}
+		fmt.Println()
 	}
 }
 
 func printAvailableOptions() {
-	fmt.Println("Select from the following options: %v", []string{"save", "load", "delete", "quit"})
+	fmt.Println("Select from the following options:")
+	for _, option := range []string{"save", "load", "delete", "quit"} {
+		fmt.Printf("- %v\n", option)
+	}
+	fmt.Println()
 }
