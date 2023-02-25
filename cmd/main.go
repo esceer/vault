@@ -22,22 +22,4 @@ func GetEngine() *cli.Engine {
 
 func main() {
 	cli.DisplayMenu(GetEngine())
-
-	// key := getKey()
-	// password := requestPassword()
-	// fmt.Printf("Password: %x (%v)\n", password, string(password))
-
-	// encodedPassword, _ := security.Encode(key, password)
-	// fmt.Printf("Encoded: %x (%v)\n", encodedPassword, string(encodedPassword))
-
-	// decodedPassword, _ := security.Decode(key, encodedPassword)
-	// fmt.Printf("Decoded: %x (%v)\n", decodedPassword, string(decodedPassword))
 }
-
-// func getKey() []byte {
-// 	return []byte("supersecret32byteslongcipherkey!")
-// }
-
-// func requestPassword() []byte {
-// 	return []byte("alma%12!0")
-// }
