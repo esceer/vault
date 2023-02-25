@@ -22,6 +22,19 @@ func NewEngine(store storage.IStore) *Engine {
 	}
 }
 
+func (e *Engine) ListKeys() error {
+	hostnames, err := e.store.ListKeys()
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("Registered hostnames:")
+	for _, hostname := range hostnames {
+		fmt.Printf("- %s\n", hostname)
+	}
+	return nil
+}
+
 func (e *Engine) SaveSecret() error {
 	hostname, err := e.read("Hostname: ")
 	if err != nil {

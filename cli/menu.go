@@ -15,6 +15,8 @@ func DisplayMenu(engine *Engine) {
 		fmt.Print("> ")
 		scanner.Scan()
 		switch scanner.Text() {
+		case "list":
+			err = engine.ListKeys()
 		case "save":
 			err = engine.SaveSecret()
 		case "load":
@@ -38,7 +40,7 @@ func DisplayMenu(engine *Engine) {
 
 func printAvailableOptions() {
 	fmt.Println("Select from the following options:")
-	for _, option := range []string{"save", "load", "delete", "quit"} {
+	for _, option := range []string{"list", "save", "load", "delete", "quit"} {
 		fmt.Printf("- %v\n", option)
 	}
 	fmt.Println()

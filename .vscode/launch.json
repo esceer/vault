@@ -3,12 +3,20 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [{
-        "name": "Go: Current File",
-        "type": "go",
-        "request": "launch",
-        // "program": "${file}",
-        "program": "cmd/main.go",
-        "console": "externalTerminal"
-    }]
+    "configurations": [
+        {
+            "name": "Vault Web",
+            "type": "go",
+            "request": "launch",
+            "program": "cmd/web/main.go"
+        },
+        {
+            "name": "Vault CLI",
+            "type": "go",
+            "request": "launch",
+            // "program": "${file}",
+            "program": "cmd/cli/main.go",
+            "console": "externalTerminal"
+        }
+    ]
 }
