@@ -9,6 +9,7 @@ import (
 func DisplayMenu(engine *Engine) {
 	printAvailableOptions()
 	scanner := bufio.NewScanner(os.Stdin)
+Loop:
 	for {
 		var err error
 
@@ -25,7 +26,7 @@ func DisplayMenu(engine *Engine) {
 			err = engine.DeleteSecret()
 		case "quit":
 			fmt.Println("Exiting...")
-			return
+			break Loop
 		default:
 			fmt.Printf("Unknown option '%v'. ", scanner.Text())
 			printAvailableOptions()

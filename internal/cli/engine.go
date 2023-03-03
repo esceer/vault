@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/esceer/vault/security"
-	"github.com/esceer/vault/storage"
+	"github.com/esceer/vault/internal/security"
+	"github.com/esceer/vault/internal/storage"
 	"golang.org/x/term"
 )
 

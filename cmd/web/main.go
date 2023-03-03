@@ -1,25 +1,16 @@
 package main
 
 import (
-	"sync"
+	"net/http"
 
-	"github.com/esceer/vault/cli"
-	"github.com/esceer/vault/storage"
+	"github.com/esceer/vault/internal/storage"
+	"github.com/esceer/vault/internal/web"
+	"github.com/gorilla/mux"
 )
-
-var (
-	once   sync.Once
-	engine *cli.Engine
-)
-
-func GetEngine() *cli.Engine {
-	once.Do(func() {
-		store := storage.New()
-		engine = cli.NewEngine(store)
-	})
-	return engine
-}
 
 func main() {
-	cli.DisplayMenu(GetEngine())
+	store := storage.New()
+	router := mux.NewRouter()
+	web.SetupRouting(router, store)
+	http.ListenAndServe(":8080", router)
 }

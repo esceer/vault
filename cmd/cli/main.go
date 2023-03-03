@@ -3,8 +3,8 @@ package main
 import (
 	"sync"
 
-	"github.com/esceer/vault/cli"
-	"github.com/esceer/vault/storage"
+	"github.com/esceer/vault/internal/cli"
+	"github.com/esceer/vault/internal/storage"
 )
 
 var (

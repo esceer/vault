@@ -1,6 +1,6 @@
 package storage
 
-import "github.com/esceer/vault/storage/internal/db"
+import "github.com/esceer/vault/internal/storage/db"
 
 type IStore interface {
 	ListKeys() ([]string, error)
