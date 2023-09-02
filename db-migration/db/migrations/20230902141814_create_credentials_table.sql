@@ -1,5 +1,5 @@
 -- migrate:up
-CREATE TABLE safe (
+CREATE TABLE credentials (
     id integer primary key autoincrement, 
     user varchar(255),
     key varchar(255),
@@ -8,4 +8,4 @@ CREATE TABLE safe (
 
 
 -- migrate:down
-DROP TABLE IF EXISTS safe;
+DROP TABLE credentials IF EXISTS safe;

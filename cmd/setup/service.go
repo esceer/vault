@@ -1,13 +1,12 @@
 package setup
 
 import (
-	"database/sql"
-
 	"github.com/esceer/vault/internal/service"
 	"github.com/esceer/vault/internal/storage"
+	"gorm.io/gorm"
 )
 
-func VaultService(db *sql.DB) service.VaultService {
-	store := storage.NewDBStorage(db)
+func VaultService(db *gorm.DB) service.VaultService {
+	store := storage.NewDBStore(db)
 	return service.NewVaultService(store)
 }

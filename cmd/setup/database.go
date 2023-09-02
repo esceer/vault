@@ -1,7 +1,6 @@
 package setup
 
 import (
-	"database/sql"
 	"fmt"
 	"net/url"
 
@@ -9,10 +8,15 @@ import (
 	_ "github.com/amacneil/dbmate/v2/pkg/driver/sqlite"
 	"github.com/esceer/vault/cmd/config"
 	dbmigration "github.com/esceer/vault/db-migration"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
-func ConnectToDB(cfg *config.Config) (*sql.DB, error) {
-	return sql.Open(cfg.DatabaseDriver, cfg.DataSource)
+func ConnectToDB(cfg *config.Config) (*gorm.DB, error) {
+	return gorm.Open(sqlite.Open(cfg.DataSource), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Silent),
+	})
 }
 
 func RunMigrationScripts(cfg *config.Config) error {
