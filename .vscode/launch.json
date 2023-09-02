@@ -5,18 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Vault Web",
+            "name": "Backend",
             "type": "go",
             "request": "launch",
-            "program": "cmd/web/main.go"
-        },
-        {
-            "name": "Vault CLI",
-            "type": "go",
-            "request": "launch",
-            // "program": "${file}",
-            "program": "cmd/cli/main.go",
-            "console": "externalTerminal"
+            "mode": "auto",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/cmd"
         }
     ]
 }

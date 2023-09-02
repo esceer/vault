@@ -1,14 +1,10 @@
 package storage
 
-import "github.com/esceer/vault/internal/storage/db"
+type identifier int
 
-type IStore interface {
-	ListKeys() ([]string, error)
-	Retrieve(key string) ([]byte, error)
-	Store(key string, secret []byte) error
-	Delete(key string) error
-}
-
-func New() IStore {
-	return db.NewStore()
+type Store interface {
+	GetKeysByUser(user string) ([]string, error)
+	GetSecret(id identifier) ([]byte, error)
+	Store(user, key string, secret []byte) error
+	Delete(id identifier) error
 }
