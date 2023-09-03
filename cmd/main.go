@@ -29,5 +29,6 @@ func main() {
 
 	// Http server
 	router := setup.WebRouting(vaultService)
+	log.Info().Msgf("Listening on %v...", cfg.ServerAddress)
 	log.Fatal().Msg(http.ListenAndServe(cfg.ServerAddress, router).Error())
 }

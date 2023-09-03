@@ -15,10 +15,9 @@ func WebRouting(vaultService service.VaultService) *mux.Router {
 	vr := router.PathPrefix("/vault").Subrouter()
 
 	cr := vr.PathPrefix("/credentials").Subrouter()
-	cr.HandleFunc("/", middleware.WithHTTPLogging(credentialApi.GetAll)).Methods("GET")
-	cr.HandleFunc("/", middleware.WithHTTPLogging(credentialApi.Save)).Methods("POST")
+	cr.HandleFunc("", middleware.WithHTTPLogging(credentialApi.GetAll)).Methods("GET")
+	cr.HandleFunc("", middleware.WithHTTPLogging(credentialApi.Save)).Methods("POST")
 	cr.HandleFunc("/{id}", middleware.WithHTTPLogging(credentialApi.Delete)).Methods("DELETE")
 	cr.HandleFunc("/{id}/secret", middleware.WithHTTPLogging(credentialApi.GetSecret)).Methods("GET")
-
 	return router
 }

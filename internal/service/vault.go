@@ -12,7 +12,7 @@ import (
 type VaultService interface {
 	GetAll() ([]*apimodel.CredentialResponse, error)
 	GetSecret(common.Identifier, common.Secret) (common.Secret, error)
-	Save(*apimodel.CredentialCreate) error
+	Save(*apimodel.CredentialCreate, common.Secret) error
 	Delete(common.Identifier) error
 }
 
@@ -29,21 +29,21 @@ func (s vaultService) GetAll() ([]*apimodel.CredentialResponse, error) {
 	return adapter.DbSliceToApiSlice(creds), err
 }
 
-func (s vaultService) GetSecret(id common.Identifier, masterKey common.Secret) (common.Secret, error) {
+func (s vaultService) GetSecret(id common.Identifier, masterkey common.Secret) (common.Secret, error) {
 	cred, err := s.store.GetById(id)
 	if err != nil {
 		return nil, err
 	}
 
-	decoded, err := s.decodeSecret(masterKey, cred)
+	decoded, err := s.decodeSecret(cred, masterkey)
 	if err != nil {
 		return nil, err
 	}
 	return decoded, nil
 }
 
-func (s vaultService) Save(apiCred *apimodel.CredentialCreate) error {
-	encoded, err := s.encodeSecret(apiCred)
+func (s vaultService) Save(apiCred *apimodel.CredentialCreate, masterkey common.Secret) error {
+	encoded, err := s.encodeSecret(apiCred, masterkey)
 	if err != nil {
 		return err
 	}
@@ -56,13 +56,13 @@ func (s vaultService) Save(apiCred *apimodel.CredentialCreate) error {
 	return s.store.Save(dbCred)
 }
 
-func (vaultService) encodeSecret(cred *apimodel.CredentialCreate) (common.Secret, error) {
-	hash := security.Hash32(security.Hash32(cred.MasterKey, []byte(cred.User)), []byte(cred.Site))
+func (vaultService) encodeSecret(cred *apimodel.CredentialCreate, masterkey common.Secret) (common.Secret, error) {
+	hash := security.Hash32(security.Hash32(masterkey, []byte(cred.User)), []byte(cred.Site))
 	return security.Encode(hash, cred.Secret)
 }
 
-func (vaultService) decodeSecret(masterKey common.Secret, cred *dbmodel.Credential) (common.Secret, error) {
-	hash := security.Hash32(security.Hash32(masterKey, []byte(cred.User)), []byte(cred.Site))
+func (vaultService) decodeSecret(cred *dbmodel.Credential, masterkey common.Secret) (common.Secret, error) {
+	hash := security.Hash32(security.Hash32(masterkey, []byte(cred.User)), []byte(cred.Site))
 	return security.Decode(hash, cred.Secret)
 }
 

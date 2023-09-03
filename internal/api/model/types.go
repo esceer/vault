@@ -1,4 +1,4 @@
-package api
+package model
 
 import (
 	"time"
@@ -7,10 +7,9 @@ import (
 )
 
 type CredentialCreate struct {
-	User      string
-	Site      string
-	MasterKey common.Secret
-	Secret    common.Secret
+	User   string
+	Site   string
+	Secret common.Secret
 }
 
 type CredentialResponse struct {
