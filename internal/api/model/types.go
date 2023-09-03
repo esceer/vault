@@ -9,7 +9,7 @@ import (
 type CredentialCreate struct {
 	User   string
 	Site   string
-	Secret common.Secret
+	Secret string
 }
 
 type CredentialResponse struct {
@@ -20,5 +20,5 @@ type CredentialResponse struct {
 }
 
 type SecretResponse struct {
-	Secret common.Secret
+	Secret string
 }

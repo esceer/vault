@@ -38,12 +38,12 @@ func (a *credentialApi) GetSecret(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	masterkey, err := getQuerySecretParam(r, "masterkey")
+	masterkey, err := getQueryParam(r, "masterkey")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	secret, err := a.service.GetSecret(common.Identifier(id), common.Secret(masterkey))
+	secret, err := a.service.GetSecret(common.Identifier(id), masterkey)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -55,7 +55,7 @@ func (a *credentialApi) GetSecret(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *credentialApi) Save(w http.ResponseWriter, r *http.Request) {
-	masterkey, err := getQuerySecretParam(r, "masterkey")
+	masterkey, err := getQueryParam(r, "masterkey")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -65,7 +65,7 @@ func (a *credentialApi) Save(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	if err = a.service.Save(&cred, common.Secret(masterkey)); err != nil {
+	if err = a.service.Save(&cred, masterkey); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

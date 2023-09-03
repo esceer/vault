@@ -1,13 +1,11 @@
 package api
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
 
-	"github.com/esceer/vault/internal/common"
 	"github.com/gorilla/mux"
 )
 
@@ -20,14 +18,6 @@ func getQueryParam(r *http.Request, param string) (string, error) {
 		return "", fmt.Errorf("missing parameter: %v", param)
 	}
 	return p[0], nil
-}
-
-func getQuerySecretParam(r *http.Request, param string) (common.Secret, error) {
-	p, err := getQueryParam(r, param)
-	if err != nil {
-		return nil, err
-	}
-	return base64.URLEncoding.DecodeString(p)
 }
 
 func getPathParam(r *http.Request, param string) (string, error) {
