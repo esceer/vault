@@ -1,9 +1,10 @@
 -- migrate:up
 CREATE TABLE credentials (
     id integer primary key autoincrement, 
-    user varchar(255),
-    key varchar(255),
-    secret blob
+    user varchar(255) not null,
+    site varchar(255) not null,
+    secret blob not null,
+    created_at datetime default current_timestamp
 );
 
 

@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/esceer/vault/internal/api"
 	"github.com/rs/zerolog/log"
 )
 
@@ -42,8 +43,8 @@ func (recorder *responseRecorder) WriteHeader(statusCode int) {
 }
 
 // WithHTTPLogging adds logging to http handler
-func (a *LoggingMiddleware) WithHTTPLogging(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func (a *LoggingMiddleware) WithHTTPLogging(next api.Handler) api.Handler {
+	return func(w http.ResponseWriter, r *http.Request) {
 		// Pre handlers
 		rw := newResponseRecorder(w)
 		log.Debug().
@@ -52,7 +53,7 @@ func (a *LoggingMiddleware) WithHTTPLogging(next http.Handler) http.Handler {
 			Msg("")
 
 		// Call handlers
-		next.ServeHTTP(rw, r)
+		next(rw, r)
 
 		// Post handlers
 		if isError(rw.Code) {
@@ -62,7 +63,7 @@ func (a *LoggingMiddleware) WithHTTPLogging(next http.Handler) http.Handler {
 				RawJSON("response", rw.Response).
 				Msg("")
 		}
-	})
+	}
 }
 
 func isError(responseCode int) bool {

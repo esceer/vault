@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/esceer/vault/cmd/setup"
@@ -30,6 +29,5 @@ func main() {
 
 	// Http server
 	router := setup.WebRouting(vaultService)
-	fmt.Println("Booting up web server...")
 	log.Fatal().Msg(http.ListenAndServe(cfg.ServerAddress, router).Error())
 }
