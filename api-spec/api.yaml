@@ -1,0 +1,144 @@
+swagger: '2.0'
+info:
+  title: Vault API
+  version: 0.0.1
+# host: 127.0.0.1:8080
+basePath: /vault
+
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /credentials:
+    get:
+      summary: 'Retrieve all stored credentials'
+      tags:
+        - 'Safe'
+      responses:
+        '200':
+          description: 'ok'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CredentialResponse'
+        '500':
+          description: 'internal error'
+          schema:
+            $ref: '#/definitions/APIError'
+    post:
+      parameters:
+        - in: query
+          name: masterkey
+          type: string
+          required: true
+        - in: body
+          name: body
+          required: true
+          description: The credential to store.
+          schema:
+            $ref: '#/definitions/CredentialCreate'
+      summary: 'Store a credential'
+      tags:
+        - 'Safe'
+      responses:
+        '201':
+          description: 'created'
+        '500':
+          description: 'internal error'
+          schema:
+            $ref: '#/definitions/APIError'
+  
+  /credentials/{id}:
+    parameters:
+      - name: id
+        type: integer
+        in: path
+        required: true
+    delete:
+      summary: 'Delete a credential'
+      tags:
+        - 'Safe'
+      responses:
+        '204':
+          description: 'ok'
+        '404':
+          description: 'not found'
+          schema:
+            $ref: '#/definitions/APIError'
+        '500':
+          description: 'internal error'
+          schema:
+            $ref: '#/definitions/APIError'
+
+  /credentials/{id}/secret:
+    parameters:
+      - name: id
+        type: integer
+        in: path
+        required: true
+      - in: query
+        name: masterkey
+        type: string
+        required: true
+    get:
+      summary: 'Get stored secret by credential ID'
+      tags:
+        - 'Safe'
+      responses:
+        '200':
+          description: 'ok'
+          schema:
+            $ref: '#/definitions/SecretResponse'
+        '404':
+          description: 'not found'
+          schema:
+            $ref: '#/definitions/APIError'
+        '500':
+          description: 'internal error'
+          schema:
+            $ref: '#/definitions/APIError'
+
+
+definitions:
+  APIError:
+    type: object
+    properties:
+      message:
+        type: string
+
+  CredentialCreate:
+    type: 'object'
+    required:
+      - user
+      - site
+      - secret
+    properties:
+      user:
+        type: string
+      site:
+        type: string
+      secret:
+        type: string
+  
+  CredentialResponse:
+    type: 'object'
+    properties:
+      id:
+        type: integer
+      user:
+        type: string
+      site:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+  
+  SecretResponse:
+    type: 'object'
+    properties:
+      secret:
+        type: string

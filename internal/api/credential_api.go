@@ -69,7 +69,7 @@ func (a *credentialApi) Save(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusAccepted)
+	w.WriteHeader(http.StatusCreated)
 }
 
 func (a *credentialApi) Delete(w http.ResponseWriter, r *http.Request) {

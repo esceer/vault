@@ -11,7 +11,7 @@ import (
 
 type VaultService interface {
 	GetAll() ([]*apimodel.CredentialResponse, error)
-	GetSecret(common.Identifier, string) (string, error)
+	GetSecret(common.Identifier, string) (*apimodel.SecretResponse, error)
 	Save(*apimodel.CredentialCreate, string) error
 	Delete(common.Identifier) error
 }
@@ -29,17 +29,17 @@ func (s vaultService) GetAll() ([]*apimodel.CredentialResponse, error) {
 	return adapter.DbSliceToApiSlice(creds), err
 }
 
-func (s vaultService) GetSecret(id common.Identifier, masterkey string) (string, error) {
+func (s vaultService) GetSecret(id common.Identifier, masterkey string) (*apimodel.SecretResponse, error) {
 	cred, err := s.store.GetById(id)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	decoded, err := s.decodeSecret(cred, masterkey)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-	return decoded, nil
+	return &apimodel.SecretResponse{Secret: decoded}, nil
 }
 
 func (s vaultService) Save(apiCred *apimodel.CredentialCreate, masterkey string) error {

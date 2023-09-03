@@ -13,6 +13,7 @@ func WebRouting(vaultService service.VaultService) *mux.Router {
 
 	router := mux.NewRouter()
 	vr := router.PathPrefix("/vault").Subrouter()
+	// vr.Handle("/swagger-ui/", http.StripPrefix("/swagger-ui", swaggerui.Handler(apispec.ApiSpec)))
 
 	cr := vr.PathPrefix("/credentials").Subrouter()
 	cr.HandleFunc("", middleware.WithHTTPLogging(credentialApi.GetAll)).Methods("GET")
