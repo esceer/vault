@@ -9,3 +9,4 @@ The application automatically creates and migrates a `sqlite` database in the ap
 
 ## Swagger
 The project contains the api description inside `api/spec/api.yaml` directory. Once the application is running, swagger-ui can also be accessed in a browser via `/swagger-ui/`.
+a
