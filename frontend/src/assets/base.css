@@ -21,6 +21,9 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
   --dark-bluish: rgb(18, 26, 36);
+  --dusky-green: rgb(6, 170, 94);
+  --dusky-blue: rgb(29, 43, 58);
+  --half-transparent-light: rgba(255, 255, 255, .5);
 }
 
 :root {
@@ -28,6 +31,7 @@
   --color-border: var(--vt-c-divider-dark-2);
   --color-heading: var(--vt-c-text-dark-1);
   --color-text: var(--vt-c-text-dark-2);
+  --color-form-text: var(--half-transparent-light);
 }
 
 *,

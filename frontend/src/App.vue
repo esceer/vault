@@ -45,7 +45,7 @@ footer {
 }
 
 main {
-  background-color: var(--vt-c-white-soft);
+  background-color: #cfe2df;
   color: var(--vt-c-black-soft);
   flex: 3.5;
 }
