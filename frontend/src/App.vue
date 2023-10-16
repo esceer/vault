@@ -10,9 +10,6 @@ import Menu from './components/Menu.vue';
       Safe
     </header>
     <Menu></Menu>
-    <footer>
-        <a href="https://github.com/esceer/vault">Github</a>
-    </footer>
   </aside>
 
   <main>
@@ -39,13 +36,8 @@ header {
   gap: 10px;
 }
 
-footer {
-  margin-top: 25px;
-  padding-left: 40px;
-}
-
 main {
-  background-color: #cfe2df;
+  background-color: var(--color-background-secondary);
   color: var(--vt-c-black-soft);
   flex: 3.5;
 }

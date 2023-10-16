@@ -21,13 +21,15 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
   --dark-bluish: rgb(18, 26, 36);
-  --dusky-green: rgb(6, 170, 94);
   --dusky-blue: rgb(29, 43, 58);
+  --dusky-green: rgb(6, 170, 94);
+  --soft-white-green-accent: #e4f7f4;
   --half-transparent-light: rgba(255, 255, 255, .5);
 }
 
 :root {
   --color-background: var(--dark-bluish);
+  --color-background-secondary: var(--soft-white-green-accent);
   --color-border: var(--vt-c-divider-dark-2);
   --color-heading: var(--vt-c-text-dark-1);
   --color-text: var(--vt-c-text-dark-2);
