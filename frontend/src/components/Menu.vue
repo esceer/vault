@@ -6,29 +6,29 @@ import { RouterLink } from 'vue-router'
     <nav>
         <ul>
             <li>
-                <img class="logo" src="@/assets/home.svg" />
+                <img class="logo" src="@/assets/img/home.svg" />
                 <RouterLink to="/">Home</RouterLink>
             </li>
             <li>
-                <img class="logo" src="@/assets/list.png" />
+                <img class="logo" src="@/assets/img/list.png" />
                 <RouterLink to="/list">List</RouterLink>
             </li>
             <li>
-                <img class="logo" src="@/assets/plussign.png" />
+                <img class="logo" src="@/assets/img/plussign.png" />
                 <RouterLink to="/create">New</RouterLink>
             </li>
             <li>
-                <img class="logo" src="@/assets/search.svg" />
+                <img class="logo" src="@/assets/img/search.svg" />
                 <RouterLink to="/search">Search</RouterLink>
             </li>
             <li>
-                <img class="logo" src="@/assets/shield.png" />
+                <img class="logo" src="@/assets/img/shield.png" />
                 <RouterLink to="/security">Security</RouterLink>
             </li>
         </ul>
     </nav>
     <footer>
-        <img class="logo" src="@/assets/info.svg" />
+        <img class="logo" src="@/assets/img/info.svg" />
         <a href="https://github.com/esceer/vault">Github</a>
     </footer>
 </template>

@@ -6,7 +6,7 @@ import Menu from './components/Menu.vue';
 <template>
   <aside>
     <header>
-      <img class="logo" src="@/assets/logo.svg" width="50" height="50" />
+      <img class="logo" src="@/assets/img/logo.svg" />
       Safe
     </header>
     <Menu></Menu>
@@ -40,5 +40,10 @@ main {
   background-color: var(--color-background-secondary);
   color: var(--vt-c-black-soft);
   flex: 3.5;
+}
+
+.logo {
+  width: 75px;
+  height: 75px;
 }
 </style>

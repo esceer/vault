@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <img src="../assets/logo.svg">
+        <img src="../assets/img/safe.svg">
         <div class="text">
             <h2>Welcome to Vault, your personal secret assistant!</h2>
             <p>You can securely store passwords, pins, notes or all sorts of secrets you want to hide from the public.</p>
@@ -16,7 +16,7 @@
 }
 
 img {
-    width: 300px;
+    width: 350px;
 }
 
 h2, span{
